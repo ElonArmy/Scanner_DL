@@ -27,6 +27,7 @@
       - 텍스트를 가릴 경우 OCR이 어려워진다 => "텍스트가 가려졌습니다" 알려주는 기능
   - 조명반사 제거:
     조명의 반사로 인해 책페이지가 하양게 붕 떠서 내용이 잘보이지 않을때 => 어떻게 해야할지 잘모르겠음(조사 필요)
+    - openCV로 Binary Thresholding 기법으로 문자의 가독성 향상 (https://www.youtube.com/watch?v=tYF3EBkvYO0)
   - 자동 스캔:
     버튼을 누르지 않고도 페이지를 자동스캔하여 저장하는 기능 (https://khurramjaved.com/RecursiveCNN.pdf)
   - OCR 과정: 문자인식
