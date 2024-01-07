@@ -4,6 +4,7 @@
 
 ## 가상환경 사용법(windows일 경우)
 - macOS의 경우 방법이 다름
+- pip을 최신버전으로 먼저 업데이트한다 => python.exe -m pip install --upgrade pip
 - 터미널에서 먼저 가상환경을 만든다 ex) python -m venv rcfenv
 - 터미널에서 가상환경을 실행시킨다 ex) source rcfenv/Scripts/activate
 - 가상환경에 패키지를 설치한다 ex) pip install -r requirements.txt
