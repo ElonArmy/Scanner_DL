@@ -14,3 +14,9 @@
 - 단순한 경계선 인식 모델로 사각형의 경계를 찾아 윤곽선(네모로) 보정을 한것임
 - 때문에 왜곡된 문서의 경우 인식 불가함 ⇒ dewarp모델의 필요성
 - CPU로 돌리면 느림 약 20초 이상 => 서버에서 그래픽으로 돌리면됨
+
+## Flask
+- 가상환경을 실행하고 pip install Flask 로 플라스크 설치
+- 경로로 이동하여 서버 실행 helloworld 확인
+- FLASK_ENV=development FLASK_APP=app.py flask run
+- 터미널에서 경로로 이동후 python app.py 실행 하면 모델 예측 반환확인
