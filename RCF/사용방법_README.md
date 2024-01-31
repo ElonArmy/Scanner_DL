@@ -16,6 +16,6 @@
 - CPU로 돌리면 느림 약 20초 이상 => 서버에서 그래픽으로 돌리면됨
 
 ## Flask
-- 가상환경을 실행하고 pip install Flask 로 플라스크 설치
-- 'flask_test/' 경로로 이동하여 서버 실행 FLASK_ENV=development FLASK_APP=app.py flask run
+- 가상환경을 실행하고 pip install -r requirements.txt로 플라스크등 필요한 패키지 설치
+- cd RCF/flask_test/ 경로로 이동하여 서버 실행 FLASK_ENV=development FLASK_APP=app.py flask run
 - vscode를 하나더 켜서 DRF 서버를 실행하여 이미지를 업로드하고 사용해본다.
