@@ -17,5 +17,5 @@
 
 ## Flask
 - 가상환경을 실행하고 pip install Flask 로 플라스크 설치
-- 경로로 이동하여 서버 실행 FLASK_ENV=development FLASK_APP=app.py flask run
+- 'flask_test/' 경로로 이동하여 서버 실행 FLASK_ENV=development FLASK_APP=app.py flask run
 - vscode를 하나더 켜서 DRF 서버를 실행하여 이미지를 업로드하고 사용해본다.
