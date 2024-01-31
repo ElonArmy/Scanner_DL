@@ -17,6 +17,5 @@
 
 ## Flask
 - 가상환경을 실행하고 pip install Flask 로 플라스크 설치
-- 경로로 이동하여 서버 실행 helloworld 확인
-- FLASK_ENV=development FLASK_APP=app.py flask run
+- 경로로 이동하여 서버 실행 FLASK_ENV=development FLASK_APP=app.py flask run
 - 터미널에서 경로로 이동후 python app.py 실행 하면 모델 예측 반환확인

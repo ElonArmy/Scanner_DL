@@ -313,18 +313,6 @@ class RCF():
 # 모아 두어야하는데 패키지 의존성때문에 model에 같이 넣었따
 
 
-def prepare_image_PIL(im):
-    im = im[:,:,::-1] - np.zeros_like(im) # rgb to bgr
-    # im -= np.array((104.00698793,116.66876762,122.67891434))
-    im = np.transpose(im, (2, 0, 1)) # (H x W x C) to (C x H x W)
-    return im
-
-def prepare_image_cv2(im):
-    # im -= np.array((104.00698793,116.66876762,122.67891434))
-    im = cv2.resize(im, dsize=(1024, 1024), interpolation=cv2.INTER_LINEAR)
-    im = np.transpose(im, (2, 0, 1)) # (H x W x C) to (C x H x W)
-    return im
-
 def plt_imshow(title='image', img=None, figsize=(8, 5)):
     plt.figure(figsize=figsize)
 
@@ -391,30 +379,6 @@ def find_contours(img, thresh=-1):
 
     return receiptCnt
 
-# 꼭짓점을 연결하여 그려주는 함수
-def draw_contours(img, contour):
-    output = img.copy()
-    cv2.drawContours(output, [contour], -1, (0, 255, 255), 10)
-    plt_imshow("Draw Outline", output, figsize=(16, 10))
 
-
-#사용자가 찍은 꼭짓점을 우상,좌상,좌하,우하순 정렬한다
-def user_contours(points):
-    # x 좌표와 y 좌표를 크기순으로 정렬하여 찾는다
-    points.sort(key=lambda point: (point[0], point[1]))
-
-    # x 좌표가 작은 두점 => 왼쪽 상하단
-    top_left = min(points[:2], key=lambda point: point[1])
-    bottom_left = max(points[:2], key=lambda point: point[1])
-
-    # x 좌표가 큰 두점 => 오른쪽 상하단
-    top_right = min(points[2:], key=lambda point: point[1])
-    bottom_right = max(points[2:], key=lambda point: point[1])
-
-    orderPoints = [top_right, top_left, bottom_left, bottom_right]
-
-    # 차원 변환 
-    user_contours = np.array([[[x, y]] for x, y in orderPoints], dtype=np.int32)
-    return user_contours
 
 
