@@ -4,10 +4,22 @@
 
 ## 가상환경 사용법(windows일 경우)
 - macOS의 경우 방법이 다름
-- pip을 최신버전으로 먼저 업데이트한다 => python.exe -m pip install --upgrade pip
-- 터미널에서 먼저 가상환경을 만든다 ex) python -m venv rcfenv
-- 터미널에서 가상환경을 실행시킨다 ex) source rcfenv/Scripts/activate
-- 가상환경에 패키지를 설치한다 ex) pip install -r requirements.txt
+- pip을 최신버전으로 먼저 업데이트한다
+  ```
+  python.exe -m pip install --upgrade pip
+  ```
+- 터미널에서 먼저 가상환경을 만든다
+  ```
+  python -m venv rcfenv
+  ```
+- 터미널에서 가상환경을 실행시킨다
+  ```
+  source rcfenv/Scripts/activate
+  ```
+- 가상환경에 패키지를 설치한다
+  ```
+  pip install -r requirements.txt
+  ```
 - RCF.ipynb 를 한 셀씩 실행시켜본다
 
 ## 문제점
@@ -16,6 +28,12 @@
 - CPU로 돌리면 느림 약 20초 이상 => 서버에서 그래픽으로 돌리면됨
 
 ## Flask
-- 가상환경을 실행하고 pip install -r requirements.txt로 플라스크등 필요한 패키지 설치
-- cd RCF/flask_test/ 경로로 이동하여 서버 실행 FLASK_ENV=development FLASK_APP=app.py flask run
+- 가상환경을 실행하고 플라스크등 필요한 패키지 설치 
+  ```
+  pip install -r requirements.txt
+  ```
+- RCF/flask_test/ 경로로 이동하여 서버 실행
+  ```
+  FLASK_ENV=development FLASK_APP=app.py flask run
+  ```
 - vscode를 하나더 켜서 DRF 서버를 실행하여 이미지를 업로드하고 사용해본다.
