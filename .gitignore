@@ -1,4 +1,15 @@
+# 테스트 데이터
+Simple_Dewarp/MNIST/
+
+
+# 가상환경 패키지
 rcfenv/
 rcf_env/
+
+
+# RCF 사전학습모델
 RCF/only-final-lr-0.01-iter-130000.pth
-Simple_Dewarp/MNIST/
+
+# 페이퍼엣지 사전학습모델
+model_analysis/PaperEdge/models/G_w_checkpoint_13820.pt
+model_analysis/PaperEdge/models/L_w_checkpoint_27640.pt
