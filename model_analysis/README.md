@@ -10,7 +10,14 @@
 - PaperEdge:
     - [Enet](https://drive.google.com/file/d/1OVHETBHQ5u-1tnci3qd7OcAjas4v1xnl/view?usp=sharing), [Tnet](https://drive.google.com/file/d/1gEp4ecmdvKds2nzk9CaZb_pLvhRoyAsv/view?usp=sharing)
     - 사전학습 모델을 models 폴더에 넣는다.
-    - 가상환경을 키고 model_analysis/PaperEdge 경로에서 demo.py실행 ```python demo.py --Enet_ckpt 'models/G_w_checkpoint_13820.pt'                --Tnet_ckpt 'models/L_w_checkpoint_27640.pt'                --img_path 'images/IMG_2424.jpg'                --out_dir 'output'```
-    - --imagepath를 수정하면 원하는 이미지 가능
-    - 가상환경에 설치된 파이토치의 rcf_env/Lib/site-packages/torch/functional.py에서 line 504를 
-    ```return _VF.meshgrid(tensors, **kwargs, indexing="ij")```로 수정
+    - 가상환경을 키고 model_analysis/PaperEdge 경로에서 demo.py실행
+    - --image_path를 수정해서 원하는 이미지 넣기
+    ```
+    python demo.py --Enet_ckpt 'models/G_w_checkpoint_13820.pt' --Tnet_ckpt 'models/L_w_checkpoint_27640.pt' --img_path 'images/IMG_2424.jpg' --out_dir 'output'
+    ```
+    - output 폴더에서 결과물 확인
+
+    - 가상환경에 설치된 파이토치의 rcf_env/Lib/site-packages/torch/functional.py에서 line 504의 return을 수정해야됨
+    ```
+    return _VF.meshgrid(tensors, **kwargs, indexing="ij")
+    ```

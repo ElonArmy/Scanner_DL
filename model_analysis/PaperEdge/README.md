@@ -33,9 +33,3 @@ The values in the last 3 columns are `AD`, `MS-SSIM`, and `LD`.
     ```
   3. The final result:
   ![compare](https://user-images.githubusercontent.com/28639377/196933170-81c7e3d8-3661-429b-ae17-efae33366545.png)
-
-
-python demo.py --Enet_ckpt 'models/G_w_checkpoint_13820.pt' \
-               --Tnet_ckpt 'models/L_w_checkpoint_27640.pt' \
-               --img_path 'images/1.jpg' \
-               --out_dir 'output'
