@@ -8,8 +8,12 @@ import multiprocessing as mp
 import tqdm
 import shutil
 import numpy.ctypeslib as npct
-from utils.utils import *
+
+# from utils.utils import *
+from docUnet_pytorch.utils.utils import *
 import argparse
+
+print('실행 확인')
 
 array_2d_float = npct.ndpointer(np.float32, ndim=2, flags='C_CONTIGUOUS')
 
@@ -25,6 +29,8 @@ def clip_img_c(img_path, save_path):
     :param save_path: 图像保存路径
     :return:
     '''
+    print(img_path,'경로확인')
+
     dll.clip_img(img_path, save_path)
 
 
