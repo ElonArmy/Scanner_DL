@@ -9,10 +9,12 @@ import tqdm
 import shutil
 import numpy.ctypeslib as npct
 
-# from utils.utils import *
-from docUnet_pytorch.utils.utils import *
+from utils import *
+# from docUnet_pytorch.utils.utils import *
 import argparse
+import platform
 
+print(platform.architecture())
 print('실행 확인')
 
 array_2d_float = npct.ndpointer(np.float32, ndim=2, flags='C_CONTIGUOUS')
@@ -196,8 +198,13 @@ if __name__ == '__main__':
     parser.add_argument('-n', '--num', type=int, default=100000, required=True,
                         help='the number of generat images')
     Flags, _ = parser.parse_known_args()
+    
+    # dll = npct.load_library("libadd_background.dll", "./cpp/add_background/build/")
 
-    dll = npct.load_library("data_generator/cpp/add_background/build/libadd_background.so")
+    import ctypes
+    sopath =''
+    dll = ctypes.CDLL("/cpp/add_background/build/libadd_background.so")
+
     dll.generate_one_img_py.restype = c_int
     dll.generate_one_img_py.argtypes = [c_char_p, c_char_p, c_char_p, c_int, c_int, array_2d_float, array_2d_float,
                                         c_int, c_int, c_int]
