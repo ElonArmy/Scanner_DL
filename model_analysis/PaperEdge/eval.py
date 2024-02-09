@@ -1,3 +1,4 @@
+# 전반적인 과정을 이해하기위해서 페이지를 보면된다
 import argparse
 import json
 

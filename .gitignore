@@ -12,8 +12,9 @@ rcf_env/
 RCF/only-final-lr-0.01-iter-130000.pth
 
 # 페이퍼엣지 사전학습모델
-model_analysis/PaperEdge/models/G_w_checkpoint_13820.pt
-model_analysis/PaperEdge/models/L_w_checkpoint_27640.pt
+model_analysis/PaperEdge/models/
+Simple_DewarpNet/PaperEdge/models/
 
-# 서버실행 파이썬 바이트 코드파일
+# 바이트 코드파일
+*.pyc
 RCF/flask_test/__pycache__/

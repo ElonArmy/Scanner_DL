@@ -7,20 +7,6 @@
 
 ## 사용법
 - Docunet:
-    - 32비트 python이 필요함
-    - 링크에서 [다운로드](https://www.python.org/downloads/release/python-3913/) 맨밑에 files에서 32비트버전 설치 path설정필수
-    - 가상환경 생성 => 인터프리터 선택시 python 3.9-32비트 필수
-    ```
-    python -m venv py32venv
-    ```
-    - 버전확인
-    ```
-    python --version
-    ```
-    - 
-    python data_generator/generator.py -i /test_data/scan_images -b /test_data/background_images -o /test_data/output -n 10
-    ```
-"C:/Users/82105/AppData/Local/Programs/Python/Python39-32/python.exe"
 - RectiNet: [코랩 데모](https://colab.research.google.com/drive/1aBFOIAZ5JHaoQsw4ihC0usZP0ZI-jlLE?usp=sharing)
 - PaperEdge:
     - [Enet](https://drive.google.com/file/d/1OVHETBHQ5u-1tnci3qd7OcAjas4v1xnl/view?usp=sharing), [Tnet](https://drive.google.com/file/d/1gEp4ecmdvKds2nzk9CaZb_pLvhRoyAsv/view?usp=sharing)
@@ -28,7 +14,7 @@
     - 가상환경을 키고 model_analysis/PaperEdge 경로에서 demo.py실행
     - --image_path를 수정해서 원하는 이미지 넣기
     ```
-    python demo.py --Enet_ckpt 'models/G_w_checkpoint_13820.pt' --Tnet_ckpt 'models/L_w_checkpoint_27640.pt' --img_path 'images/IMG_2424.jpg' --out_dir 'output'
+    python demo.py --img_path 'images/IMG_2453.jpg' --out_dir 'output'
     ```
     - output 폴더에서 결과물 확인
 
