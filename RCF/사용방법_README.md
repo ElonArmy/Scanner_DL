@@ -20,6 +20,7 @@
   ```
   pip install -r requirements.txt
   ```
+- [RCF pre-trained model 다운로드 링크](https://drive.google.com/file/d/15dl2GkxsRuy6ovWYZ8uGiYCgNwXAhcNj/view)
 - RCF.ipynb 를 한 셀씩 실행시켜본다
 
 ## 문제점
