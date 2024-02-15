@@ -1,9 +1,11 @@
 # Simple Dewarp 모델에 관한 설명
-- DewarpNet(2019)와 FDRnet(2022)의 구조를 참고하여 핵심 네트워크만을 가지고 간단하게 구현하는것이 목표이다
-- PaperEdge 모델의 아키텍처를 참고하여 구현한다.
-- 데이터 생성은 PaperEdge모델과 docUnet모델을 참고한다
-- 현재는 따로 만들고있는데 최종적으로 하나의 모델안에 합쳐야한다.
+## 목표
+- PaperEdge 모델을 사전학습 시켜 사용해본다.
+- 사전학습을 위한 마스크 데이터 생성 -> 그랩컷 활용
 - 사전학습 모델 [Enet](https://drive.google.com/file/d/1OVHETBHQ5u-1tnci3qd7OcAjas4v1xnl/view?usp=sharing), [Tnet](https://drive.google.com/file/d/1gEp4ecmdvKds2nzk9CaZb_pLvhRoyAsv/view?usp=sharing)
+
+- 완벽 분석이 끝나고 나면 모델 아키텍처를 어떻게 바꾸면 더 좋은 성능이 나올수 있을지 테스트하면서 분석해본다
+
 
 ## Dewarp 모델 핵심 구조(end-to-end 파이프라인)
 - 공간변환 네트워크(Spatial Transformer Networks, STNs) : 이미지에서 문서의 위치와 방향을 감지하고, 표준화된 형태로 변환해준다
