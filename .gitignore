@@ -16,7 +16,12 @@ RCF/only-final-lr-0.01-iter-130000.pth
 # 페이퍼엣지 사전학습모델
 model_analysis/PaperEdge/models/
 Simple_DewarpNet/PaperEdge/models/
+PaperEdge_finetune_test/models
+PaperEdge_finetune_test/chck
 
 # 바이트 코드파일
 *.pyc
 RCF/flask_test/__pycache__/
+
+# 테스트
+PaperEdge/

@@ -20,10 +20,10 @@ class DIW(Dataset):
         # load the list of diw images
         with open('./data/diw_5k.txt', 'r') as fid:
             self.X = fid.read().splitlines()
-        self.X = [root_dir + '/img/' + t + '.png' for t in self.X]
+        self.X = [root_dir + '/img/' + t + '.jpg' for t in self.X]
 
-        with open('./data/bgtex.txt', 'r') as fid:
-            self.bgtex = fid.read().splitlines()
+        # with open('./data/bgtex.txt', 'r') as fid:
+        #     self.bgtex = fid.read().splitlines()
 
     def __len__(self):
         if self.num:
@@ -55,48 +55,62 @@ class DIW(Dataset):
 class DIWDataAug(nn.Module):
     def __init__(self):
         super(DIWDataAug, self).__init__()
+        # 이미지 밝기, 대비, 채도, 색조 무작위로 적용
         self.cj = KA.ColorJitter(0.1, 0.1, 0.1, 0.1)
     
     def forward(self, img, ms, bg):
         # tight crop
-        mask = ms[:, 0] > 0.5
+        # 객체가 있는 영역만 남긴다
+        # mask = ms[:, 0] > 0.5
         
+        # 이미지의 갯수 뽑기, 배치사이즈
         B = img.size(0)
-        c = torch.randint(20, (B, 5))
+        # 랜덤한 정수 5개 생성
+        # c = torch.randint(20, (B, 5))
+        
         img_list = []
         msk_list = []
         for ii in range(B):
-            x_img = img[ii]
-            x_msk = mask[ii]
-            y, x = x_msk.nonzero(as_tuple=True)
-            minx = x.min()
-            maxx = x.max()
-            miny = y.min()
-            maxy = y.max()
-            x_img = x_img[:, miny : maxy + 1, minx : maxx + 1]
-            x_msk = x_msk[None, miny : maxy + 1, minx : maxx + 1]
+            # x_img = img[ii]
+            # x_msk = mask[ii]
+            # 객체를 포함하는 영역을 추출
+            # y, x = x_msk.nonzero(as_tuple=True)
+            # minx = x.min()
+            # maxx = x.max()
+            # miny = y.min()
+            # maxy = y.max()
+            # x_img = x_img[:, miny : maxy + 1, minx : maxx + 1]
+            # x_msk = x_msk[None, miny : maxy + 1, minx : maxx + 1]
 
             # padding
-            x_img = F.pad(x_img, c[ii, : 4].tolist())
-            x_msk = F.pad(x_msk, c[ii, : 4].tolist())
+            # 추출한 영역에서 랜덤한 패딩을 추가
+            # 랜덤한 패딩값을 상하좌우 각각의 면에 넣으면서 찌그러짐이
+            # 발생한다
+            # x_img = F.pad(x_img, c[ii, : 4].tolist())
+            # x_msk = F.pad(x_msk, c[ii, : 4].tolist())
 
             # replace bg
-            if c[ii][-1] > 2:
-                x_bg = bg[ii][:, :x_img.size(1), :x_img.size(2)]
-            else:
-                x_bg = torch.ones_like(x_img) * torch.rand((3, 1, 1), device=x_img.device)
-            x_msk = x_msk.float()
-            x_img = x_img * x_msk + x_bg * (1. - x_msk)
+            # 나머지공간에 랜덤 배경을 추가한다
+            # if c[ii][-1] > 2:
+            #     x_bg = bg[ii][:, :x_img.size(1), :x_img.size(2)]
+            # else:
+            #     x_bg = torch.ones_like(x_img) * torch.rand((3, 1, 1), device=x_img.device)
+            # x_msk = x_msk.float()
+            # x_img = x_img * x_msk + x_bg * (1. - x_msk)
 
             # resize
+            # 이미지와 마스크를 리사이징한다
+            # 마스크는 더작게 리사이징해도 일반적으로 좋다고한다
             x_img = KG.resize(x_img[None, :], (256, 256))
             x_msk = KG.resize(x_msk[None, :], (64, 64))
             img_list.append(x_img)
             msk_list.append(x_msk)
         img = torch.cat(img_list)
         msk = torch.cat(msk_list)
+        
         # jitter color
-        img = self.cj(img)
+        # 위에서 정의한 대로 이미지의 색상에 대한 무작위 변환 적용
+        # img = self.cj(img)
         return img, msk
 
 
