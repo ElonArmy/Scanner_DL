@@ -1,5 +1,5 @@
 {
-    "batch_size": 64,
+    "batch_size": 8,
     "epochs": 20,
     "exp_dir": "./chck/",
     "lr_G": 1e-5,

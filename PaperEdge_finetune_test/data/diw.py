@@ -174,16 +174,35 @@ class DIWDataAug(nn.Module):
         self.cj = KA.ColorJitter(0.1, 0.1, 0.1, 0.1)
     
     def forward(self, img, ms, bg):
-        # tight crop 
-        mask = ms[:, 0] > 0.5
-        
         B = img.size(0)
-        c = torch.randint(20, (B, 5))
+        # 패딩값 지정해주기randint(최소, 최대, (B, 갯수))
+        c = torch.randint(50, 200, (B, 6))
         img_list = []
         msk_list = []
+        
+        # torch.Size([3, 512, 512]) torch.Size([512, 512])
+        # torch.Size([1, 3, 256, 256]) torch.Size([1, 1, 64, 64])
+        # 원본 이미지도 학습
+        for ii in range(B):
+            x_img = img[ii].unsqueeze(0)
+            x_msk = ms[ii].unsqueeze(1)
+            # print(x_img.shape, x_msk.shape)
+            
+            # resize
+            x_img = F.interpolate(x_img, size=(256, 256), mode='bilinear', align_corners=False)
+            x_msk = F.interpolate(x_msk, size=(64, 64), mode='nearest')
+
+            img_list.append(x_img)
+            msk_list.append(x_msk)
+            
+        # tight crop : boolean으로 바꿈
+        mask = ms[:, 0] > 0.5
+            
+        # 원본이미지를 증강한것을 학습
         for ii in range(B):
             x_img = img[ii]
             x_msk = mask[ii]
+            
             y, x = x_msk.nonzero(as_tuple=True)
             minx = x.min()
             maxx = x.max()
@@ -202,34 +221,37 @@ class DIWDataAug(nn.Module):
             else:
                 x_bg = torch.ones_like(x_img) * torch.rand((3, 1, 1), device=x_img.device)
             x_msk = x_msk.float()
+            
+            # x_bg를 x_img와 같은 크기로 리사이징
+            if x_bg.size(1) != x_img.size(1) or x_bg.size(2) != x_img.size(2):
+                x_bg = F.interpolate(x_bg.unsqueeze(0), size=x_img.size()[1:], mode='bilinear', align_corners=False).squeeze(0)
+
             x_img = x_img * x_msk + x_bg * (1. - x_msk)
 
             # resize
             x_img = KG.resize(x_img[None, :], (256, 256))
             x_msk = KG.resize(x_msk[None, :], (64, 64))
             
-            # 이미지 확인해보기
-            plt.figure(figsize=(10,5))
-            cimg = x_img.squeeze().cpu().detach().numpy().transpose((1, 2, 0))
-            cimg = np.clip(cimg, 0, 1)
-            plt.subplot(1,2,1)
-            plt.title('cimg')
-            plt.imshow(cimg)
-            plt.axis('off')  # 축제거
-            # print(x_msk.dim(), x_msk)
-            cmsk = x_msk.squeeze().cpu().detach().numpy()
-            # msk = np.clip(msk, 0, 1)
-            plt.subplot(1,2,2)
-            plt.title('cmsk')
-            plt.imshow(cmsk, cmap='gray')
-            plt.axis('off')  # 축제거
-            plt.show()
-            plt.close()
-            
             img_list.append(x_img)
             msk_list.append(x_msk)
         img = torch.cat(img_list)
         msk = torch.cat(msk_list)
+        
+        # 이미지를 시각화: 학습할 원본+증강이미지 확인해보려면
+        # for ix in range(len(img)):
+        #     plt.figure(figsize=(8,4))
+        #     imgs = img[ix]
+        #     imgs = imgs.permute(1, 2, 0).numpy()
+        #     plt.subplot(1,2,1)
+        #     plt.imshow(imgs)
+        #     msks = msk[ix]
+        #     msks = msks.permute(1, 2, 0).numpy()
+        #     plt.subplot(1,2,2)
+        #     plt.imshow(msks, cmap='gray')
+        #     plt.show()
+        # plt.close()
+        # return
+        
         # jitter color
         img = self.cj(img)
         return img, msk
