@@ -8,6 +8,7 @@ Simple_DewarpNet/PaperEdge/images/data
 py32venv/
 rcfenv/
 rcf_env/
+cuda_env/
 
 
 # RCF 사전학습모델
